@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--Name:		RPC
+	Course:		235.01
+	HomeWork:	#2
+	Git-Hub:	https://github.com/User-Banned/CSC-235_HW-02
+--> 	
+<html>
+<head><STYLE TYPE = "text/css">
+h1{text-align:center;}
+div.a{text-align:center;}
+table.t{margin-left:auto;margin-right:auto;}
+td.a{text-align:right;font-family:"Arial";}
+td.b{border:2px #EFEFEF inset;background-color:#AEAFFF;width:2em;text-align:center;font-family:"Arial";}
+td.c{text-align:right;width:120px;}
+button.r{color:#F5E6E3;background-color:#5F00CA;margin-right:20px;font-family:"Times New Roman";}
+button.ng{color:#5F00CA;background-color:F5E6E3;margin-right:0px;font-family:"Times New Roman";}
+</STYLE></head>
+<body>
+<script langauge="JavaScript">
+var v=new Array(0,0,0,0,0),h=new Array(false,false,false,false,false),f=new Array(0,0,0,0,0,0,0),k=new Array(false,false,false,false,false,false,false),l=new Array(false,false,false,false,false,false),r=0,tsum=0,total=0,c=0,scored=false;
+function newGame(){v[0]=v[1]=v[2]=v[3]=v[4]=0;h[0]=h[1]=h[2]=h[3]=h[4]=false;f[1]=f[2]=f[3]=f[4]=f[5]=f[6]=0;k[1]=k[2]=k[3]=k[4]=k[5]=k[6]=false;l[3]=l[4]=l[5]=false;r=0;tsum=0;total=0;for(var i=0;i<5;i++){document.getElementById("d"+i).src="pix/dice0.gif";}for(var i=1;i<7;i++){document.getElementById("s"+i).innerHTML="";}for(var i=3;i<6;i++){document.getElementById("k"+i).innerHTML="";}document.getElementById("t0").innerHTML="";}
+function roll(){if(c<9){if(r<3){if(scored){scored=false;}f[1]=f[2]=f[3]=f[4]=f[5]=f[6]=0;r++;for(var i=0;i<5;i++){if(!h[i]){v[i]=Math.floor(6*Math.random())+1;document.getElementById("d"+i).src="pix/dice"+v[i]+".gif";}f[v[i]]++;}}}}
+function hold(i){if(r<3&&!scored){d=document.getElementById("d"+i);h[i]=!h[i];if(h[i]){d.src="pix/diceX"+v[i]+".gif";}else{d.src="pix/dice"+v[i]+".gif";}}}
+function scr(i){if(!k[i])document.getElementById("s"+i).innerHTML=tsum=f[i]*i;}
+function clr(i){if(!k[i]){document.getElementById("s"+i).innerHTML="";tsum=0;}}
+function keep(i){if(!k[i]){k[i]=!k[i];scored=true;r=0;c++;total=total+tsum;tscr();h[0]=h[1]=h[2]=h[3]=h[4]=false;}}
+function kscr(i){if(!l[i]){sum=0;for(var j=0;j<7;j++)if(f[j]>=i)for(var m=0;m<5;m++)sum=sum+v[m];document.getElementById("k"+i).innerHTML=sum;tsum=sum;}}
+function kclr(i){if(!l[i]){document.getElementById("k"+i).innerHTML="";tsum=0;}}
+function kkeep(i){if(!l[i]){l[i]=!l[i];scored=true;r=0;c++;total=total+tsum;tscr();h[0]=h[1]=h[2]=h[3]=h[4]=false;}}
+function tscr(){document.getElementById("t0").innerHTML=total;}
+</script>
+<h1>Yahtzee</h1><div class="a">
+	<img id="d0"onClick="hold(0)"src="pix/dice0.gif">
+	<img id="d1"onClick="hold(1)"src="pix/dice0.gif">
+	<img id="d2"onClick="hold(2)"src="pix/dice0.gif">
+	<img id="d3"onClick="hold(3)"src="pix/dice0.gif">
+	<img id="d4"onClick="hold(4)"src="pix/dice0.gif"></div><br></br>
+<table class="t">
+<tr><td class="a"><b>1's</b></td><td id="s1"onmouseover="scr(1)"onmouseout="clr(1)"onClick="keep(1)"class="b"></td><td class="c"rowspan="5"><button class="r"onClick="roll()">Roll</button></td></tr>
+<tr><td class="a"><b>2's</b></td><td id="s2"onmouseover="scr(2)"onmouseout="clr(2)"onClick="keep(2)"class="b"></td></tr>
+<tr><td class="a"><b>3's</b></td><td id="s3"onmouseover="scr(3)"onmouseout="clr(3)"onClick="keep(3)"class="b"></td></tr>
+<tr><td class="a"><b>4's</b></td><td id="s4"onmouseover="scr(4)"onmouseout="clr(4)"onClick="keep(4)"class="b"></td></tr>
+<tr><td class="a"><b>5's</b></td><td id="s5"onmouseover="scr(5)"onmouseout="clr(5)"onClick="keep(5)"class="b"></td></tr>
+<tr><td class="a"><b>6's</b></td><td id="s6"onmouseover="scr(6)"onmouseout="clr(6)"onClick="keep(6)"class="b"></td><td class="c"rowspan="5"><button class="ng"onclick="newGame()">New Game</button></td></tr>
+<tr><td class="a"><b>3 of a Kind</b></td><td id="k3"onmouseover="kscr(3)"onmouseout="kclr(3)"onClick="kkeep(3)"class="b"></td></tr>
+<tr><td class="a"><b>4 of a Kind</b></td><td id="k4"onmouseover="kscr(4)"onmouseout="kclr(4)"onClick="kkeep(4)"class="b"></td></tr>
+<tr><td class="a"><b>Yahtzee</b></td><td id="k5"onmouseover="kscr(5)"onmouseout="kclr(5)"onClick="kkeep(5)"class="b"></td></tr>
+<tr><td class="a"><b>Total</b></td><td id="t0"class="b"></td></tr></table>
+</body>
+</html>
